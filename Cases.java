@@ -161,7 +161,6 @@ public class Cases {
                 
             
         }
-        // 7 minutes in to the day 6 video
         return value;
     }
     
