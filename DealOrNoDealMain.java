@@ -33,11 +33,13 @@ public class DealOrNoDealMain {
         while(choose){
             pickCases(test,test2);
             
-            //below lines don't work or are incomplete
-            //int value = (test2.middleValue() + test2.Average())/2;
-            //int ch = JOptionPane.showConfirmDialog(null, "Your offer is " + value + ". Deal or no deal?");
+            int value = (test2.middleValue() + test2.Average())/2;
+            int ch = JOptionPane.showConfirmDialog(null, "Your offer is " + value + ". Deal or no deal?");
             if(ch == 0){
                 choose = false;
+            }
+            if(casesToPick > 1){
+                casesToPick = casesToPick - 1;
             }
         }
     }
