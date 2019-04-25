@@ -119,6 +119,14 @@ public class Cases {
         }
     }
     
+    public void shuffle()
+    {
+        for (int i = 1; i < cases.length; i++) {
+            int newLocation = ((int)Math.random() * (cases.length - 1)) + 1;
+            swap(i,newLocation);
+        }
+    }
+    
     public void setLocation(int location)
     {
         cases[location] = 0;
