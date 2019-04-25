@@ -27,13 +27,16 @@ public class DealOrNoDealMain {
     public static void main(String[] args) {
         
         Cases test = new Cases();
+        test.shuffle();
+        
         Cases test2 = new Cases();
         
         boolean choose = true;
+        int value = 0;
         while(choose){
             pickCases(test,test2);
             
-            int value = (test2.middleValue() + test2.Average())/2;
+            value = (test2.middleValue() + (int)test2.Average())/2;
             int ch = JOptionPane.showConfirmDialog(null, "Your offer is " + value + ". Deal or no deal?");
             if(ch == 0){
                 choose = false;
@@ -42,6 +45,7 @@ public class DealOrNoDealMain {
                 casesToPick = casesToPick - 1;
             }
         }
+        JOptionPane.showMessageDialog(null,"Your case had " + test.ValueOfCase(0));
     }
     
 }
