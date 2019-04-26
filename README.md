@@ -11,3 +11,6 @@ https://stackoverflow.com/questions/12258399/how-to-create-folder-in-github-repo
 
 That little Hello World guide thing:
 https://guides.github.com/activities/hello-world/
+
+Other guides:
+https://guides.github.com/
