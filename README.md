@@ -14,3 +14,21 @@ https://guides.github.com/activities/hello-world/
 
 Other guides:
 https://guides.github.com/
+
+
+
+# h1
+## h2
+### h3
+#### h4
+##### h5
+###### h6
+
+
+*italic*
+
+_also italic_
+
+**bold**
+
+__also bold__
