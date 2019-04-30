@@ -75,8 +75,7 @@ public class Cases {
     public String valuesleft()
     {
        String toRet = "";
-       //just started on Day 2 Part B video
-        for (int i = 1; i < cases.length; i++) {
+       for (int i = 1; i < cases.length; i++) {
             if(cases[i] != 0)
             {
                 toRet = toRet + cases[i] + " ";
@@ -127,6 +126,7 @@ public class Cases {
         }
     }
     
+    
     public void setLocation(int location)
     {
         cases[location] = 0;
@@ -135,20 +135,18 @@ public class Cases {
     public int SumOfValues(int numcasesleft)
     {
         int sum = 0;
-        //int avg = 0;
         for (int i = 0; i < numcasesleft; i++) {
             if(cases[i] != 0){
                 sum = sum + cases[i];
-                //avg = sum / numcasesleft;
             }
         }
         return sum;
     }
-    
-    public double Average(int SumOfValues)
+
+    public double Average()
     {
-        int sum = SumOfValues;
-        int count = numcasesleft();
+        int sum = SumOfValues(0);
+        int count = this.numcasesleft();
         return sum / count;
     }
     
@@ -166,8 +164,6 @@ public class Cases {
                 value = cases[i];
                 break;
             }
-                
-            
         }
         return value;
     }
