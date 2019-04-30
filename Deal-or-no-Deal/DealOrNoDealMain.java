@@ -36,13 +36,17 @@ public class DealOrNoDealMain {
         while(choose){
             pickCases(test,test2);
             
-            value = (test2.middleValue() + (int)test2.Average())/2;
+            value = (test2.middleValue() + (int)test2.Average()) / 2;
             int ch = JOptionPane.showConfirmDialog(null, "Your offer is " + value + ". Deal or no deal?");
             if(ch == 0){
                 choose = false;
             }
             if(casesToPick > 1){
                 casesToPick = casesToPick - 1;
+            }
+            if(test.numcasesleft() <= 2)
+            {
+                choose = false;
             }
         }
         JOptionPane.showMessageDialog(null,"Your case had " + test.ValueOfCase(0));
