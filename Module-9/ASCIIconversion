@@ -10,14 +10,16 @@ public class ASCIIconversion {
 
     public static void main(String[] args) {
 
-        for (int i = 1; i < 255; i++) {
+        for (int i = 1; i < 3000; i++) {
             System.out.print(" Decimal: " + i);
             System.out.print(" ASCII: " + (char)i);
-            System.out.print(" Base 8: " + Integer.toOctalString(i));
+            System.out.print(" Octal: " + Integer.toOctalString(i));
+            System.out.print(" Hexadecimal: " + Integer.toHexString(i).toUpperCase());
+            System.out.print(" Binary: " + Integer.toBinaryString(i));
+            System.out.print(" Base 9: " + Integer.toString(i, 9));
 
             System.out.println();
         }
     }
 
 }
-//about 5 minutes in to the ASCII video
