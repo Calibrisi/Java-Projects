@@ -37,11 +37,23 @@ public class TicTacToe {
         
    }
     
-    private class EuroButtonHandler implements ActionListener {
+    private void OnePlayer(){
+        
+    }
+    
+    private void TwoPlayer(){
+        
+    }
+    
+    private class P1ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Double d = Double.parseDouble(input.getText());
-            d = d * .9;
-            output.setText(d.toString());
+            
+      }
+   }
+    
+    private class P2ButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            
       }
    }
     
@@ -114,7 +126,7 @@ public class TicTacToe {
 //      JButton eurobutt = new JButton("USD to euro");
 //      USDButtonHandler USDlistener = new USDButtonHandler();
 //      USDbutt.addActionListener(USDlistener);
-//      EuroButtonHandler eurolistener = new EuroButtonHandler();
+//      P1ButtonHandler eurolistener = new P1ButtonHandler();
 //      eurobutt.addActionListener(eurolistener);
 //      inputFormat = new DecimalFormat("0.00");
 //      input = new JFormattedTextField(inputFormat);
