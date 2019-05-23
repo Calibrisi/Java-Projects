@@ -1,33 +1,34 @@
 package tictactoe;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import java.util.Random;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class TicTacToe {
     private JFrame window;
-    private String wordA;
-    private JFormattedTextField input;
-    private TextField output;
-    private DecimalFormat inputFormat;
     private char[][] theGrid;
     private JButton[][] theGridButtons;
+    private boolean dualPlayer = false;
     
         
     private class GridButtonHandler implements ActionListener {
         private int i;
         private int j;
         public void actionPerformed(ActionEvent e) {
-            Toggle(i, j);
+            if(dualPlayer){
+                Toggle(i, j);
+            }
+            else{
+                if(theGrid[i][j] == '-'){
+                    theGrid[i][j] = 'O';
+                    ComputerMove();
+                }
+            }
+            
             RedrawGrid();
       }
         public GridButtonHandler(int i_, int j_){
@@ -37,24 +38,28 @@ public class TicTacToe {
         
    }
     
-    private void OnePlayer(){
-        
-    }
-    
-    private void TwoPlayer(){
-        
-    }
     
     private class P1ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            
+            dualPlayer = false;
       }
    }
     
     private class P2ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            
+            dualPlayer = true;
       }
+   }
+    
+    private class clearButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                theGrid[i][j] = '-';
+                }
+            }
+            RedrawGrid();
+        }
    }
     
     public TicTacToe(){
@@ -121,23 +126,20 @@ public class TicTacToe {
     }
     
     public void run() {
-      
-//      JButton USDbutt = new JButton("euro to USD");
-//      JButton eurobutt = new JButton("USD to euro");
-//      USDButtonHandler USDlistener = new USDButtonHandler();
-//      USDbutt.addActionListener(USDlistener);
-//      P1ButtonHandler eurolistener = new P1ButtonHandler();
-//      eurobutt.addActionListener(eurolistener);
-//      inputFormat = new DecimalFormat("0.00");
-//      input = new JFormattedTextField(inputFormat);
-//      output = new TextField();
+    
+        JButton P1 = new JButton("1 Player");
+        P1.addActionListener(new P1ButtonHandler());
+        JButton P2 = new JButton("2 Player");
+        P2.addActionListener(new P2ButtonHandler());
+        JButton clear = new JButton("clear");
+        clear.addActionListener(new clearButtonHandler());
       
       
         JPanel content = new JPanel();
         content.setLayout(new GridLayout(4,3));
-        content.add(new JButton("1 Player"));
-        content.add(new JButton("2 Player"));
-        content.add(new JButton());
+        content.add(P1);
+        content.add(P2);
+        content.add(clear);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 content.add(theGridButtons[i][j]);
@@ -161,7 +163,3 @@ public class TicTacToe {
 
 
 }
-
-//make other 3 buttons
-//in 2 player, toggle
-//in 1 player, computer move
