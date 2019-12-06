@@ -1,0 +1,127 @@
+
+
+package dealornodeal;
+
+import javax.swing.JOptionPane;
+
+public class DealOrNoDeal {
+   
+    public static void pickfirstcase(Cases mycase, Cases valuecases){
+        String [] t = mycase.casesleft();
+        String values = valuecases.valuesleft();
+        int n = JOptionPane.showOptionDialog(null, values,
+            "what case do you want?",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, t, t[1]);
+       
+        mycase.swap(n + 1, 0);
+    }
+   
+    public static void main(String[] args) {
+        Cases test = new Cases();
+       
+        pickfirstcase(test,test);
+    }
+}
+
+
+------------------------------------------------------------------------------------------------------
+
+
+package dealornodeal;
+
+import java.util.ArrayList;
+
+
+public class Cases {
+   
+    private int[] cases;
+   
+    public Cases(){
+        cases = new int[27];
+        cases[0] = 0;
+        cases[1] = 1;
+        cases[2] = 2;
+        cases[3] = 5;
+        cases[4] = 10;
+        cases[5] = 25;
+        cases[6] = 50;
+        cases[7] = 75;
+        cases[8] = 100;
+        cases[9] = 200;
+        cases[10] = 300;
+        cases[11] = 400;
+        cases[12] = 500;
+        cases[13] = 750;
+        cases[14] = 1000;
+        cases[15] = 5000;
+        cases[16] = 10000;
+        cases[17] = 25000;
+        cases[18] = 50000;
+        cases[19] = 75000;
+        cases[20] = 100000;
+        cases[21] = 200000;
+        cases[22] = 300000;
+        cases[23] = 400000;
+        cases[24] = 500000;
+        cases[25] = 750000;
+        cases[26] = 1000000;
+    }
+   
+    public int numcasesleft(){
+        int count = 0;
+        for (int i = 1; i < cases.length; i++) {
+            if(cases[i] != 0){
+                count++;
+            }
+        }
+        return count;
+    }
+   
+    public String[] casesleft(){
+        int left = numcasesleft();
+        String [] toRet = new String [left];
+        int toRetLast = 0;
+        for (int i = 1; i < cases.length; i++) {
+            if(cases[i] != 0){
+                toRet[toRetLast] = i + "";
+                toRetLast++;
+            }
+        }
+        return toRet;
+    }
+   
+    public ArrayList<String> casesleftlist(){
+        ArrayList<String> toRet = new ArrayList<String>();
+        for (int i = 1; i < cases.length; i++) {
+            if(cases[i] != 0){
+                toRet.add(i + "");
+            }
+        }
+        return toRet;
+    }
+   
+    public String valuesleft(){
+        String toRet = "";
+        for (int i = 1; i < cases.length; i++) {
+            if(cases[i] != 0){
+                toRet += cases[i] + " ";
+            }
+        }
+        return toRet;
+    }
+   
+    public String toString(){
+        String blah = "";
+        for (int i = 0; i < cases.length; i++) {
+            blah += cases[i] + " ";
+        }
+        return blah;
+    }
+   
+    public void swap(int a, int b){
+        int temp = cases[a];
+        cases[a] = cases[b];
+        cases[b] = temp;
+    }
+}
