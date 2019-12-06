@@ -1,0 +1,72 @@
+package arrays;
+
+class ArrayClass{
+
+    public static void one(int [] nums)
+    {
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+        }
+    }
+
+    public static double summe(int [] nums)
+    {
+        double sum = 0;
+       
+        for (int i = 0; i < nums.length; i++) {
+            sum = sum + nums[i];
+        }
+       
+        return sum;
+    }
+    /**
+     * Finds the average of all the numbers in the array
+     */
+    public static double average(int [] nums)   
+    {
+        double avg = summe(nums)/(double)nums.length;
+        return avg;
+    }
+   
+    /**
+     * counts how many numbers are larger than 100
+     */
+    public static int countBig(int [] nums)
+    {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+           
+            if(nums[i] > 100){
+                count = count + 1;
+            }
+        }
+        return count;
+    }
+
+   
+    /**
+     * Count evens
+     * counts how many of the numbers are even  (nums%2 == 0)
+     */
+    public static int countEvens(int[] nums)
+    {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+           
+            if(nums[i]%2 == 0){
+                count = count + 1;
+            }
+        }
+        return count;
+    }
+   
+   
+    public static void main(String[] args) {
+        int[] numbers = {1,3,4,2,1,4,5,2,12,1,12,3,3234,57,6,789,65,34123};
+        one(numbers);
+        System.out.println(summe(numbers));
+        System.out.println(average(numbers));
+        System.out.println(countBig(numbers));
+        System.out.println(countEvens(numbers));
+    }
+}
