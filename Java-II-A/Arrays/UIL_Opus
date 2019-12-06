@@ -1,0 +1,126 @@
+package opus;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Opus {
+   
+    static public class TestAnswers
+    {
+        String[] answers;
+       
+        TestAnswers(String[] answersArg)
+        {
+            answers = answersArg;
+        }
+       
+        int computeGrade(TestAnswers key)
+        {
+            int grade = 0;
+            if (key.answers.length != this.answers.length)
+            {
+                throw new RuntimeException("OMFG");
+            }
+            for (int i = 0; i < key.answers.length; i++)
+            {
+                if (this.answers[i].equals("S") ) continue;
+                if (this.answers[i].equals(key.answers[i]))
+                {
+                    grade += 6;
+                }
+                else
+                {
+                    grade -= 2;
+                }
+            }
+            return grade;
+        }
+       
+        int computeNumCorrect(TestAnswers key)
+        {
+            int numCorrect = 0;
+            if (key.answers.length != this.answers.length)
+            {
+                throw new RuntimeException("OMFG");
+            }
+            for (int i = 0; i < key.answers.length; i++)
+            {
+                if (this.answers[i] == key.answers[i])
+                {
+                    numCorrect += 1;
+                }
+            }
+            return numCorrect;
+        }
+               
+    }
+   
+    static public class TestResult
+    {
+        String lastname;
+        String firstname;
+        String school;
+        String classification;
+        int grade;
+        int numCorrect;
+       
+        TestResult(String lastArg, String firstArg, String schoolArg, String classArg, int gradeArg, int correctArg){
+            lastname = lastArg;
+            firstname = firstArg;
+            school = schoolArg;
+            classification = classArg;
+            grade = gradeArg;
+            numCorrect = correctArg;
+        }
+       
+        String getLastName(){
+            return lastname;
+        }
+       
+        String getFirstName(){
+            return firstname;
+        }
+       
+        String getSchool(){
+            return school;
+        }
+       
+        String getClassification(){
+            return classification;
+        }
+       
+        int getGrade(){
+            return grade;
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws Exception{
+        TestResult[] testResults = new TestResult[1000];
+        //I don't know how to use arraylists, so I hard coded it at 1000 because I didn't know how many lines there would be
+        int numTestResults = 0;
+       
+        Scanner input = new Scanner(new File("Opus.dat"));
+        String ans[] = input.nextLine().split(" ");
+        TestAnswers key = new TestAnswers(Arrays.copyOfRange(ans, 1, ans.length));
+        while(input.hasNextLine()){
+            String line[] = input.nextLine().split(" ");
+            TestAnswers test = new TestAnswers(Arrays.copyOfRange(line, 4, line.length));
+            TestResult testresult = new TestResult(line[1], line[0], line[2], line[3], test.computeGrade(key), test.computeNumCorrect(key));
+            testResults[numTestResults] = testresult;
+            numTestResults++;
+        }
+        for(int i = 0; i < numTestResults; i++){
+            System.out.println(
+                    testResults[i].getClassification() + " " +
+                    testResults[i].getLastName() + ", " +
+                    testResults[i].getFirstName() + " - " +
+                    testResults[i].getSchool() + " " +
+                    testResults[i].getGrade());
+        }
+    }
+   
+}
