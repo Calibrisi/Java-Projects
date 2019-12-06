@@ -1,0 +1,258 @@
+package blackjack;
+
+import static java.lang.System.*;
+import java.util.*;
+import javax.swing.*;
+
+public class BlackJack {
+
+    static int deck[];
+    static int deckI;
+    static ArrayList<Integer> player;
+    static ArrayList<Integer> dealer;
+
+    static int bet;
+    static int money = 500;
+
+    /**
+     * Builds a deck of cards this will be done day 1
+     */
+    public static void build() {
+      // make a new deck of 52 cards
+      // set every spot in the array to a card value.
+        deck = new int[52];
+       
+        for (int i = 0; i <= 3; i++) {
+            for (int e = 0; e <= 12; e++) {
+                if(e == 12){
+                    deck[e + (i * 13)] = 11;
+                }
+                else if(e > 8){
+                    deck[e + (i * 13)] = 10;
+                }
+                else{
+                    deck[e + (i * 13)] = e + 2;
+                }
+               
+            }
+        }
+       
+    }
+
+    /**
+     * This method is done for you, and is only used to see the deck of cards,
+     * it will not be used for the final Black Jack Program
+     */
+    public static void displayDeck() {
+        for (int i = 0; i < deck.length; i++) {
+            System.out.println(i + "  " + deck[i]);
+        }
+    }
+
+    /**
+     * DAY 2
+     * Deal the cards, this method is for day 2.  You will deal 3 cards
+     * 2 to the player and 1 to the Dealer, you will then display all the cards
+     */
+    public static void deal() {
+        player = new ArrayList();
+        dealer = new ArrayList();
+
+        deckI = 0;  // this sets the location of the deck to the first card in the deck
+
+        int aCard = deck[deckI];  // grabs the next card from the deck
+        deckI++;  // moves the pointer to the next card in the deck
+        player.add(aCard);  // deals 1 card to the player
+        // deal 1 card to the dealer
+        aCard = deck[deckI];
+        deckI++;
+        dealer.add(aCard);
+        // deal 1 more card to the player
+        aCard = deck[deckI];
+        deckI++;
+        player.add(aCard);
+       
+        CompleteDisplay();  // display the cards
+    }
+   
+        /**
+         * DAY 2
+         * This method will return a string of all the cards in a hand of cards
+         * @param cards an ArrayList of cards
+         * @return all of the cards in your hand
+         */
+      public static String display(ArrayList<Integer> cards) {
+        String YourCards = "";   // set YourCards to an inital value of nothing
+            for (int i = 0; i < cards.size(); i++) {
+                YourCards = YourCards + cards.get(i) + " ";
+               
+            }
+        // go through all of your cards and add the value to YourCards
+       
+        return "Total value of cards is " + sumOfCards(cards) + "\n The cards are " + YourCards;
+    }
+      /**
+       * COMPLETED METHOD USED DAY 2
+       * This will display all of the cards in the dealer and players hand
+       */
+    public static void CompleteDisplay() {
+        String dealerCards = display(dealer);
+        String playerCards = display(player);
+        JOptionPane.showMessageDialog(null, "HERE ARE THE PLAYERS CARDS \n" + playerCards
+                + "\n  Here are the Dealer Cards \n" + dealerCards);
+    }
+
+    /**
+     * DAY 3
+     * Add up the value of your cards
+     * This will return the sum of all cards in a hand of cards
+     * @param cards an Integer of arrayList of cards
+     * @return the sum of the cards
+     */
+    public static int sumOfCards(ArrayList<Integer> cards) {
+        int sum = 0;
+       
+        for (int i = 0; i < cards.size(); i++) {
+                sum = sum + cards.get(i);
+        }
+               
+        // add up the value of all the cards in the ArrayList of cards
+        return sum;
+    }
+    /**
+     * Day 4
+    * This method allows the player to decide to hit of Stay in Black Jack
+    */
+    public static void hitOrStay() {
+
+        String ans = JOptionPane.showInputDialog(null, "Do you want to HIT or STAY???");
+
+        while (ans.contains("H") && sumOfCards(player) < 21) {
+           // deal a card see method deal
+            int aCard = deck[deckI];
+            deckI++;
+            player.add(aCard);
+
+            CompleteDisplay();
+            if(sumOfCards(player) < 21){
+                ans = JOptionPane.showInputDialog(null, "Do you want to HIT or STAY???");
+            }
+            if(sumOfCards(player) > 21){
+                CheckAce(player);
+            }
+           // check to see if the value of the cards is less than 21
+                // if the value is less than 21 allow player to choose another card.
+        }
+    }
+    /**
+     * DAY 4
+     * This method allows the dealer to decide if they need to hit of Stay
+     */
+    public static void DealersTurn() {
+        while(sumOfCards(dealer) < 16){
+            int aCard = deck[deckI];
+            deckI++;
+            dealer.add(aCard);
+        }
+       
+        if(sumOfCards(dealer) > 21){
+            CheckAce(dealer);
+        }
+        CompleteDisplay();
+        // while the sum of the dealer cards are less that 16
+            // add a card to the dealer
+            // if the sum of the dealer cards are over 21
+                // check to see if the dealer has an Ace
+            // call CompleteDisplay();
+    }
+
+    /**
+     * DAY 4 Check to see if there is an Ace in the hand
+     * This method checks to see if an Ace (11) is in you hand
+     * If there is an ace, it will change it to a 1
+     * @param hand all the cards in a hand
+     */
+    public static void CheckAce(ArrayList<Integer> hand) {
+        // loop through the hand
+            // if the spot is an 11
+                // set the spot to 1
+                // return;
+               
+        for (int i = 0; i < hand.size(); i++) {
+            if(hand.get(i) == 11){
+                hand.set(i, 1);
+                return;
+            }
+        }
+    }
+/**
+ * Day 5
+ * This method checks to see who wins the hand of black jack
+ */
+    public static void WhoWins() {
+        CompleteDisplay();
+        if (sumOfCards(player) > 21){
+            money = money - bet;
+            JOptionPane.showMessageDialog(null, "House wins the bet \n you have " + money);
+        }
+        else if (sumOfCards(dealer) > 21){
+            money = money + bet;
+            JOptionPane.showMessageDialog(null, "Player wins the bet\n you have  " + money);
+        }
+        else if (sumOfCards(dealer) > sumOfCards(player)){
+            money = money - bet;
+            JOptionPane.showMessageDialog(null, "House wins the bet \n you have " + money);
+        }
+        else if (sumOfCards(player) > sumOfCards(dealer)){
+            money = money + bet;
+            JOptionPane.showMessageDialog(null, "Player wins the bet\n you have  " + money);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Nobody wins\n you have" + money);
+        }
+        // use 3 more else if to see who won
+    }
+    /**
+     * Day 5
+     * Swaps every card with another card in the Deck
+     * Shuffles the deck of cards
+     */
+    public static void shuffle() {
+        for (int i = 0; i < deck.length; i++) {
+            int rand = (int) (Math.random() * deck.length);
+            int spareCard = deck[i];
+            deck[i] = deck[rand];
+            deck[rand] = spareCard;
+            //dis boi a muppet
+            // make a sparecard with card at spot i
+            // set the value of spot i to the value of rand
+            // set the value of rand to sparecard
+        }
+    }
+
+    public static void main(String[] args) {
+
+//          //DAY 1 Build deck and display the deck
+//        build();
+//        displayDeck();
+//        //Day 2
+//        deal();
+//        player = new ArrayList();
+//        dealer = new ArrayList();
+        while (true) {
+            build();
+            shuffle();
+            deal();
+            String Tbet = JOptionPane.showInputDialog("Enter your bet");
+            try {
+                bet = Integer.parseInt(Tbet);
+            } catch (Exception E) {
+                bet = 50;
+            }
+           
+            hitOrStay();
+            DealersTurn();
+            WhoWins();
+        }
+    }
+}
