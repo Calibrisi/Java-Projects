@@ -1,0 +1,44 @@
+package binarytree;
+
+import static java.lang.System.in;
+import java.util.Scanner;
+
+public class BinaryTree {
+
+    static int binarytree[] = new int [1000];
+   
+    public static void putintree(int nextnum){
+        int spot = 1;
+        while(binarytree[spot] != 0){
+            if(nextnum > binarytree[spot]){
+                spot = 1 + 2 * spot;
+            }
+            else{
+                spot = 2 * spot;
+            }
+        }
+        binarytree[spot] = nextnum;
+        display();
+        System.out.println("");
+    }
+   
+    public static void display(){
+        for (int i = 1 ; i < binarytree.length ; i++)    {
+            if(binarytree[i] != 0){
+                System.out.print(binarytree[i] + " ");
+            }
+        }
+       
+    }
+   
+    public static void main(String[] args) {
+        Scanner input = new Scanner(in);
+        int nextnum = input.nextInt();
+        while(nextnum != -1){
+            putintree(nextnum);
+            nextnum = input.nextInt();
+        }
+        display();
+    }
+   
+}
